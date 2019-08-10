@@ -1,0 +1,24 @@
+{
+  "name": "restronaut-db",
+  "version": "1.0.0",
+  "description": "Database gateway for restronaut",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cemobas/restronaut-db.git"
+  },
+  "author": "Cem Onur Bas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cemobas/restronaut-db/issues"
+  },
+  "homepage": "https://github.com/cemobas/restronaut-db#readme",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "hapi": "^16.7.0",
+    "mongodb": "^3.3.0-beta2"
+  }
+}
