@@ -16,9 +16,9 @@ mongo
 ```
 
 ### 1.2 Setup server
-To import the json collection in sample.json file, run this in a new terminal tab:
+To import the json collections, run this in a new terminal tab:
 ```
-mongoimport --db restronaut-db restronaut --collection venues --jsonArray data/sample.json
+mongoimport --db restronaut-db --collection venues --jsonArray data/venues.json && mongoimport --db restronaut-db --collection offers --jsonArray data/offers.json
 ```
 
 Later on mongodb screen jump to "restronaut-db":
@@ -53,9 +53,20 @@ Filter the data by range
 db.venues.find({name: {$gte: "N"}})
 ```
 
-We can see the result in a tidy format
+We can see the results in a tidy format.
 ```
 db.venues.find({"name": "Mezzalians"}).pretty()
+```
+
+Regex search example (cmds are equal)
+```
+db.venues.find({name: {$regex:/zz/}})
+db.venues.find({name: /zz/})
+```
+
+View regex'ed results with chosen fields
+```
+db.venues.find({name: /zz/},{venueId:1,address:1,_id:0})
 ```
 
 ### 1.5 Projections to see specific fields
@@ -77,6 +88,60 @@ db.venues.find({}, {name:1, address:1, _id:0}).pretty().sort({name: -1}).limit(1
 You can skip the first X results (skipping 4 in this example):
 ```
 db.venues.find({}, {name:1, address:1, _id:0}).pretty().sort({name: -1}).limit(1).skip(4)
+```
+
+### 1.6 Indexes
+You can view indexes with
+```
+db.venues.getIndexes()
+
+Add a text index in offers on tags
+```
+db.offers.createIndex({tags:"text"})
+```
+
+Then search tags using the index, such as
+```
+db.offers.find({$text:{$search:"wrap"}}).pretty()
+db.offers.find({$text:{$search:"burger"}}).pretty()
+```
+
+Mongo indexes offer relevance feature. You can add relevance score (and sorting) like
+```
+db.offers.find({$text:{$search:"burger"}}, {score: {$meta:"textScore"}, _id:0}).pretty().sort({score: {$meta:"textScore"}})
+```
+
+### 1.7 Additional features
+You can code on mongo shell. Try this:
+```
+var venueObj = db.venues.findOne({name: /zz/},{venueId:1,_id:0})
+venueObj.clients = []
+venueObj.clients.push("Cem")
+venueObj
+```
+
+You can count (example refers to a text index added in 1.6)
+```
+> db.offers.count({$text:{$search:"burger"}})
+5
+> db.offers.count({$text:{$search:"falafel"}})
+1
+```
+
+Following aggregates venue count in offers
+```
+> db.offers.aggregate([{$group: {_id: '$venueId', count: {$sum:1}}}])
+{ "_id" : "McDonald's 1", "count" : 2 }
+{ "_id" : "Zdrowe Love", "count" : 1 }
+{ "_id" : "McDonald's 2", "count" : 2 }
+{ "_id" : "Mezzalians", "count" : 1 }
+{ "_id" : "Folk Burger Street", "count" : 2 }
+```
+
+Same result above can be achieved by storing the result using $out.
+```
+> db.offers.aggregate([{$group: {_id: '$venueId', count: {$sum:1}}}, {$out: 'venuesOfferCount'}])
+> db.venuesOfferCount.find()
 ```
 
 ## 2 Hapi server

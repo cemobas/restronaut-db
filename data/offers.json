@@ -1,0 +1,58 @@
+[
+    {
+        "title": "French Fries with chicken burger",
+        "desc": "You'll have free French fries with a chicken burger selection",
+        "tags": ["french fries", "chicken burger"],
+        "item": "french fries",
+        "venueId" : "Folk Burger Street"
+    },
+    {
+        "title": "Free drink with Lobster burger",
+        "desc": "You'll get a free non-alcoholic drink with a Lobster burger purchase.",
+        "tags": ["drink", "coke", "lemonade", "lobster burger"],
+        "item": "non-alcoholic drink",
+        "venueId" : "Folk Burger Street"
+    },
+    {
+        "title": "Double your falafels",
+        "desc": "We'll double your falafel plate, if you buy a big portion",
+        "tags": ["falafel"],
+        "item": "falafel",
+        "venueId" : "Mezzalians"
+    },
+    {
+        "title": "Chicken wrap on the go",
+        "desc": "Get a Chicken wrap with a Double XXL BigMac",
+        "tags": ["chicken wrap", "big mac", "burger"],
+        "item": "chicken wrap",
+        "venueId" : "McDonald's 1"
+    },
+    {
+        "title": "How about Apply Pie with your meal?",
+        "desc": "You can enjoy your Apple Pie with any XXL portion menu",
+        "tags": ["apple pie", "burger"],
+        "item": "apple pie",
+        "venueId" : "McDonald's 1"
+    },
+    {
+        "title": "Salad day! Free McSalad with chicken wrap",
+        "desc": "Get your McSalad with a Chicken wrap",
+        "tags": ["chicken wrap", "McSalad"],
+        "item": "McSalad",
+        "venueId" : "McDonald's 2"
+    },
+    {
+        "title": "Enjoy Ice Cream in the hot summer days",
+        "desc": "Ice Cream is for free with any each burger menu order",
+        "tags": ["salad", "burger"],
+        "item": "ice cream",
+        "venueId" : "McDonald's 2"
+    },
+    {
+        "title": "Mexican wrap for free with orders above 70 zł",
+        "desc": "Place your order above 70 zł of our delicious meals NOW and get your free Mexican wrap",
+        "tags": ["mexican wrap"],
+        "item": "mexican wrap",
+        "venueId" : "Zdrowe Love"
+    }
+]
