@@ -18,7 +18,7 @@ server.route([
     {
         method: 'GET',
         path: '/api/venues',
-        config: { json: { space: 2 } },
+        config: { json: { space: 2 } }, // To format the json returned by the server
         handler: function (request, reply) {
             var findObject = {};
             for (var key in request.query) {
@@ -56,24 +56,29 @@ server.route([
     // Update a single venue
     {
         method: 'PUT',
-        path: '/api/venues/{name}',
+        path: '/api/venues/{venueId}', // Follow the instructions on README.md
         handler: function (request, reply) {
+            /** With replace option, the unique index (venueId) and updated
+             * fields will remain, rest will be erased.
+             * http://localhost:8080/api/venues/Mezzalians?replace=true */
             if (request.query.replace == "true") {
-                request.payload.name = request.params.name;
+                request.payload.venueId = request.params.venueId;
                 console.log(request.payload);
-                collection.replaceOne({ "name": request.params.name },
+                collection.replaceOne({ "venueId": request.params.venueId },
                     request.payload,
                     function (error, results) {
-                        collection.findOne({ "name": request.params.name },
+                        collection.findOne({ "venueId": request.params.venueId },
                             function (error, results) {
                                 reply(results);
                             })
                     })
+            /** Without replace option, only the defined field will be updated.
+             * http://localhost:8080/api/venues/Mezzalians */
             } else {
-                collection.updateOne({ name: request.params.name },
+                collection.updateOne({ venueId: request.params.venueId },
                     { $set: request.payload },
                     function (error, results) {
-                        collection.findOne({ "name": request.params.name }, function (error, results) {
+                        collection.findOne({ "venueId": request.params.venueId }, function (error, results) {
                             reply(results);
                         })
                     })
@@ -101,6 +106,7 @@ server.route([
     }
 ]);
 
+/** Hapi server starts here */
 MongoClient.connect(url, function (err, dbParent) {
     assert.equal(null, err);
     console.log("connected correctly to server");

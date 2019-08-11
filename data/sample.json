@@ -1,14 +1,27 @@
 [
     {
+        "venueId": "Folk Burger Street",
 	    "name" : "Folk Burger Street",
-        "address" : "Kalwarysjka 88"
+        "address" : "Kalwaryjska 88"
     },
     {
+        "venueId": "Mezzalians",
         "name" : "Mezzalians",
-        "address" : "Kalwarysjka 66"
+        "address" : "Kalwaryjska 66"
     },
     {
+        "venueId": "Zdrowe Love",
         "name" : "Zdrowe Love",
-        "address" : "Kalwarysjka 73"
+        "address" : "Kalwaryjska 73"
+    },
+    {
+        "venueId": "McDonald's 1",
+        "name" : "McDonald's",
+        "address" : "Krasickiego 1"
+    },
+    {
+        "venueId": "McDonald's 2",
+        "name" : "McDonald's",
+        "address" : "Krasickiego 2"
     }
 ]
