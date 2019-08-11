@@ -94,6 +94,7 @@ db.venues.find({}, {name:1, address:1, _id:0}).pretty().sort({name: -1}).limit(1
 You can view indexes with
 ```
 db.venues.getIndexes()
+```
 
 Add a text index in offers on tags
 ```
@@ -142,6 +143,7 @@ Same result above can be achieved by storing the result using $out.
 ```
 > db.offers.aggregate([{$group: {_id: '$venueId', count: {$sum:1}}}, {$out: 'venuesOfferCount'}])
 > db.venuesOfferCount.find()
+...
 ```
 
 ## 2 Hapi server
